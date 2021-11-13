@@ -24,6 +24,7 @@ async function run() {
     const orderCollections = database.collection("orders");
     const reviewCollections = database.collection("reviews");
     const usersCollections = database.collection("users");
+    const messageCollections = database.collection("messages");
 
     // Get all cycles from db
     app.get("/cycles", async (req, res) => {
@@ -74,6 +75,13 @@ async function run() {
     app.post("/cycles", async (req, res) => {
       const cycle = req.body;
       const result = await cycleCollections.insertOne(cycle);
+      console.log(result);
+      res.json(result);
+    });
+    // add Messages to db
+    app.post("/messages", async (req, res) => {
+      const message = req.body;
+      const result = await messageCollections.insertOne(message);
       console.log(result);
       res.json(result);
     });
